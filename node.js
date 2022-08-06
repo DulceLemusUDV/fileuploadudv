@@ -5,12 +5,12 @@ var io = require("socket.io")(server),
   socketStream = require("socket.io-stream"),
   fs = require("fs");
 var path = require("path");
-// var port = process.env.PORT || 8082;
+var port = process.env.PORT || 8082;
 app.use(express.static(__dirname));
 var uploadRelPath = "Uploads/";
-// var server1 = server.listen(port, function () {
-//   console.log("server Listening on port " + port);
-// });
+var server1 = server.listen(port, function () {
+  console.log("server Listening on port " + port);
+});
 
 io.on("connection", function (socket) {
   socketStream(socket).on("fileUpload", function (stream, data) {
