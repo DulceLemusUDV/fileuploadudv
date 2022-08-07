@@ -3,7 +3,7 @@ require.config({
 });
 require(["socket.io", "socket.io-stream"], function (socketIO, SocketStream) {
   console.log("required");
-  var file, socket, stream;
+  var file, name, socket, stream;
   document
     .getElementById("imageUploaderInput")
     .addEventListener("change", function (event) {
@@ -12,12 +12,19 @@ require(["socket.io", "socket.io-stream"], function (socketIO, SocketStream) {
     });
 
   document
+    .getElementById("textUploaderInput")
+    .addEventListener("change", function (event) {
+      name = event.target.value;
+      console.log(name);
+    });
+
+  document
     .getElementById("btnSubmit")
     .addEventListener("click", function (event) {
       event.preventDefault();
       if (file) {
         console.log("uploading file");
-        sendFile(file);
+        sendFile(file, name);
       }
     });
   clearHTMLElements();
@@ -25,10 +32,10 @@ require(["socket.io", "socket.io-stream"], function (socketIO, SocketStream) {
     socket = socketIO.connect("https://upload-files-udv.herokuapp.com/");
   }
   createSocket();
-  function sendFile(file) {
+  function sendFile(file, nameFile) {
     console.log(file);
     stream = SocketStream.createStream();
-    SocketStream(socket).emit("fileUpload", stream, { name: file.name });
+    SocketStream(socket).emit("fileUpload", stream, { name: nameFile });
     var blobStream = SocketStream.createBlobReadStream(file);
     var size = 0;
     showHTMLElements();

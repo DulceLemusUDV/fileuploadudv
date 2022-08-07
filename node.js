@@ -1,7 +1,11 @@
 var express = require("express"),
   app = express(),
   server = require("http").Server(app);
-var io = require("socket.io")(server),
+var io = require("socket.io")(server, {
+    cors: {
+      origin: "*",
+    },
+  }),
   socketStream = require("socket.io-stream"),
   fs = require("fs");
 var path = require("path");
