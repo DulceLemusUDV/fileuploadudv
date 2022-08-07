@@ -29,7 +29,8 @@ require(["socket.io", "socket.io-stream"], function (socketIO, SocketStream) {
     });
   clearHTMLElements();
   function createSocket() {
-    socket = socketIO.connect("https://upload-files-udv.herokuapp.com/");
+    socket = socketIO.connect("https://warm-crag-7047.herokuapp.com");
+    // socket = socketIO.connect("https://upload-files-udv.herokuapp.com/");
   }
   createSocket();
   function sendFile(file, nameFile) {
