@@ -3,7 +3,7 @@ var express = require("express"),
   server = require("http").Server(app);
 var io = require("socket.io")(server, {
     cors: {
-      origin: "*",
+      origins: "*:*",
     },
   }),
   socketStream = require("socket.io-stream"),
